@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Data Visualization Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            overflow-x: hidden;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .visualization-container {
+            display: flex;
+            height: 70vh;
+        }
+        #chatScene {
+            width: 30%;
+            height: 100%;
+            position: relative;
+        }
+        #tableScene {
+            width: 70%;
+            height: 100%;
+            position: relative;
+        }
+        .scene-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 20px;
+            border-radius: 20px;
+            z-index: 1000;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .chart-legend {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .table-container {
+            padding: 20px;
+            background: #2c3e50;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .data-table th, .data-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .data-table th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="visualization-container">
+            <div id="chatScene">
+                <div class="scene-title">3D Chat</div>
+            </div>
+            <div id="tableScene">
+                <div class="scene-title">Sales Data Visualization</div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Electronics</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <span>Clothing</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2ecc71;"></div>
+                        <span>Books</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Sales</th>
+                        <th>Growth</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Electronics</td>
+                        <td>$50,000</td>
+                        <td>+15%</td>
+                        <td>4.5</td>
+                        <td>Excellent</td>
+                    </tr>
+                    <tr>
+                        <td>Clothing</td>
+                        <td>$35,000</td>
+                        <td>+8%</td>
+                        <td>4.2</td>
+                        <td>Good</td>
+                    </tr>
+                    <tr>
+                        <td>Books</td>
+                        <td>$25,000</td>
+                        <td>+12%</td>
+                        <td>4.7</td>
+                        <td>Excellent</td>
+                    </tr>
+                    <tr>
+                        <td>Sports</td>
+                        <td>$40,000</td>
+                        <td>+20%</td>
+                        <td>4.8</td>
+                        <td>Outstanding</td>
+                    </tr>
+                    <tr>
+                        <td>Home</td>
+                        <td>$45,000</td>
+                        <td>+10%</td>
+                        <td>4.3</td>
+                        <td>Good</td>
+                    </tr>
+                    <tr>
+                        <td>Beauty</td>
+                        <td>$30,000</td>
+                        <td>+18%</td>
+                        <td>4.6</td>
+                        <td>Excellent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="controls">
+        <button onclick="addChatMessage()">Add Message</button>
+        <button onclick="rotateTable()">Rotate Charts</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="chat.js"></script>
+    <script src="table.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
